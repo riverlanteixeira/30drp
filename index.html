@@ -41,6 +41,21 @@
             <a-gltf-model src="assets/models/camera.glb" scale="1 1 1" position="0 0 0" rotation="0 0 0" class="clickable" id="pista-camera"></a-gltf-model>
         </a-marker>
 
+        <!-- Marcador Delegacia (Cena Final) -->
+        <a-marker preset="hiro" id="marker-delegacia">
+            <!-- Frankenstein -->
+            <a-gltf-model src="assets/models/frankenstein.glb" scale="1 1 1" position="-1.5 0 0" rotation="0 180 0" class="clickable suspect" id="suspect-frankenstein"></a-gltf-model>
+            <a-text value="Frankenstein\nAltura: 1.90m\nSapato: 42" position="-1.5 1.5 0" align="center" color="#FFF" width="3" class="info-panel"></a-text>
+
+            <!-- Drácula -->
+            <a-gltf-model src="assets/models/dracula.glb" scale="1 1 1" position="0 0 0" rotation="0 180 0" class="clickable suspect" id="suspect-dracula"></a-gltf-model>
+            <a-text value="Drácula\nAltura: 1.70m\nSapato: 42" position="0 1.5 0" align="center" color="#FFF" width="3" class="info-panel"></a-text>
+
+            <!-- Lobisomem -->
+            <a-gltf-model src="assets/models/lobisomem.glb" scale="1 1 1" position="1.5 0 0" rotation="0 180 0" class="clickable suspect" id="suspect-lobisomem"></a-gltf-model>
+            <a-text value="Lobisomem\nAltura: 1.90m\nSapato: 39" position="1.5 1.5 0" align="center" color="#FFF" width="3" class="info-panel"></a-text>
+        </a-marker>
+
     </a-scene>
 
     <!-- Inventário -->

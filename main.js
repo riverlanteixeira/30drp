@@ -8,6 +8,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeInventoryButton = document.getElementById('close-inventory');
     const cluesList = document.getElementById('clues-list');
 
+    const victoryScreen = document.createElement('div');
+    victoryScreen.id = 'victory-screen';
+    victoryScreen.className = 'fullscreen-overlay';
+    victoryScreen.style.display = 'none';
+    victoryScreen.innerHTML = `
+        <img src="assets/img/emblema.png" alt="Emblema da Polícia Civil de SC">
+        <h1>Parabéns!</h1>
+        <p>Você desvendou o mistério e prendeu o ladrão!</p>
+        <button id="restart-button-victory">Jogar Novamente</button>
+    `;
+    document.body.appendChild(victoryScreen);
+
+    const errorScreen = document.createElement('div');
+    errorScreen.id = 'error-screen';
+    errorScreen.className = 'fullscreen-overlay';
+    errorScreen.style.display = 'none';
+    errorScreen.innerHTML = `
+        <img src="assets/img/emblema.png" alt="Emblema da Polícia Civil de SC">
+        <h1>Ops!</h1>
+        <p>Essa não foi a escolha certa. Revise suas pistas!</p>
+        <button id="restart-button-error">Tentar Novamente</button>
+    `;
+    document.body.appendChild(errorScreen);
+
     let collectedClues = [];
 
     // Handle Start Button
@@ -92,5 +116,64 @@ document.addEventListener('DOMContentLoaded', () => {
             pistaCamera.setAttribute('material', 'opacity: 0.5; transparent: true;');
             pistaCamera.classList.remove('clickable');
         });
+    }
+
+    // Suspect accusation logic
+    const suspectFrankenstein = document.getElementById('suspect-frankenstein');
+    const suspectDracula = document.getElementById('suspect-dracula');
+    const suspectLobisomem = document.getElementById('suspect-lobisomem');
+
+    function handleAccusation(accusedSuspectId) {
+        arScene.style.display = 'none'; // Hide AR scene
+        inventoryButton.style.display = 'none'; // Hide inventory button
+
+        if (accusedSuspectId === 'suspect-frankenstein') {
+            victoryScreen.style.display = 'flex';
+        } else {
+            errorScreen.style.display = 'flex';
+        }
+
+        // Disable further clicks on suspects
+        document.querySelectorAll('.suspect').forEach(suspect => {
+            suspect.classList.remove('clickable');
+        });
+    }
+
+    if (suspectFrankenstein) {
+        suspectFrankenstein.addEventListener('click', () => handleAccusation('suspect-frankenstein'));
+    }
+    if (suspectDracula) {
+        suspectDracula.addEventListener('click', () => handleAccusation('suspect-dracula'));
+    }
+    if (suspectLobisomem) {
+        suspectLobisomem.addEventListener('click', () => handleAccusation('suspect-lobisomem'));
+    }
+
+    // Restart buttons
+    const restartButtonVictory = document.getElementById('restart-button-victory');
+    const restartButtonError = document.getElementById('restart-button-error');
+
+    function restartGame() {
+        collectedClues = [];
+        victoryScreen.style.display = 'none';
+        errorScreen.style.display = 'none';
+        startScreen.style.display = 'flex'; // Go back to start screen
+        inventoryButton.style.display = 'block'; // Show inventory button again
+
+        // Reset AR elements opacity and clickability
+        document.querySelectorAll('[id^="pista-"]').forEach(pista => {
+            pista.setAttribute('material', 'opacity: 1; transparent: false;');
+            pista.classList.add('clickable');
+        });
+        document.querySelectorAll('.suspect').forEach(suspect => {
+            suspect.classList.add('clickable');
+        });
+    }
+
+    if (restartButtonVictory) {
+        restartButtonVictory.addEventListener('click', restartGame);
+    }
+    if (restartButtonError) {
+        restartButtonError.addEventListener('click', restartGame);
     }
 });
