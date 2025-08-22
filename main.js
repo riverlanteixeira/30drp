@@ -76,12 +76,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Click handlers for AR elements
+    // Ensure these are only for clues, not suspects
     const pistaPegada = document.getElementById('pista-pegada');
     if (pistaPegada) {
         pistaPegada.addEventListener('click', () => {
             addClue('👣 Pegada – Sapato nº 42');
-            pistaPegada.setAttribute('material', 'opacity: 0.5; transparent: true;'); // Make it semi-transparent after collection
-            pistaPegada.classList.remove('clickable'); // Prevent further clicks
+            pistaPegada.setAttribute('material', 'opacity: 0.5; transparent: true;');
+            pistaPegada.classList.remove('clickable');
         });
     }
 
@@ -119,11 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Suspect accusation logic
-    const suspectFrankenstein = document.getElementById('suspect-frankenstein');
-    const suspectDracula = document.getElementById('suspect-dracula');
-    const suspectLobisomem = document.getElementById('suspect-lobisomem');
-
     function handleAccusation(accusedSuspectId) {
+        console.log(`Acusando: ${accusedSuspectId}`); // Debug log
+
+        // Hide all AR markers to prevent interaction after accusation
+        document.querySelectorAll('a-marker').forEach(marker => {
+            marker.setAttribute('visible', false);
+        });
         arScene.style.display = 'none'; // Hide AR scene
         inventoryButton.style.display = 'none'; // Hide inventory button
 
@@ -138,6 +141,11 @@ document.addEventListener('DOMContentLoaded', () => {
             suspect.classList.remove('clickable');
         });
     }
+
+    // Attach click listeners to suspects
+    const suspectFrankenstein = document.getElementById('suspect-frankenstein');
+    const suspectDracula = document.getElementById('suspect-dracula');
+    const suspectLobisomem = document.getElementById('suspect-lobisomem');
 
     if (suspectFrankenstein) {
         suspectFrankenstein.addEventListener('click', () => handleAccusation('suspect-frankenstein'));
@@ -167,6 +175,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         document.querySelectorAll('.suspect').forEach(suspect => {
             suspect.classList.add('clickable');
+        });
+
+        // Make all markers visible again
+        document.querySelectorAll('a-marker').forEach(marker => {
+            marker.setAttribute('visible', true);
         });
     }
 
