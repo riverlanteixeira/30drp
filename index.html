@@ -19,26 +19,26 @@
 
     <!-- Cena AR -->
     <a-scene id="ar-scene" vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: true; trackingMethod: best;" renderer="antialias: true; alpha: true" style="display: none;">
-        <a-camera></a-camera>
+        <a-camera cursor="rayOrigin: mouse;" raycaster="objects: .clickable"></a-camera>
 
         <!-- Marcador da Pegada -->
         <a-marker preset="hiro" id="marker-pegada">
-            <a-image src="assets/img/pegada.png" scale="1 1 1" rotation="-90 0 0" position="0 0.5 0" class="clickable" id="pista-pegada"></a-image>
+            <a-image src="assets/img/pegada.png" scale="2 2 2" rotation="-90 0 0" position="0 0.5 0" class="clickable" id="pista-pegada"></a-image>
         </a-marker>
 
         <!-- Marcador Testemunha 1 (Homem) -->
         <a-marker preset="hiro" id="marker-testemunha1">
-            <a-gltf-model src="assets/models/homem.glb" scale="0.5 0.5 0.5" position="0 0 0" rotation="0 0 0" class="clickable" id="pista-testemunha1"></a-gltf-model>
+            <a-gltf-model src="assets/models/homem.glb" scale="1 1 1" position="0 0 0" rotation="0 0 0" class="clickable" id="pista-testemunha1"></a-gltf-model>
         </a-marker>
 
         <!-- Marcador Testemunha 2 (Mulher) -->
         <a-marker preset="hiro" id="marker-testemunha2">
-            <a-gltf-model src="assets/models/mulher.glb" scale="0.5 0.5 0.5" position="0 0 0" rotation="0 0 0" class="clickable" id="pista-testemunha2"></a-gltf-model>
+            <a-gltf-model src="assets/models/mulher.glb" scale="1 1 1" position="0 0 0" rotation="0 0 0" class="clickable" id="pista-testemunha2"></a-gltf-model>
         </a-marker>
 
         <!-- Marcador Câmera de Segurança -->
         <a-marker preset="hiro" id="marker-camera">
-            <a-gltf-model src="assets/models/camera.glb" scale="0.5 0.5 0.5" position="0 0 0" rotation="0 0 0" class="clickable" id="pista-camera"></a-gltf-model>
+            <a-gltf-model src="assets/models/camera.glb" scale="1 1 1" position="0 0 0" rotation="0 0 0" class="clickable" id="pista-camera"></a-gltf-model>
         </a-marker>
 
     </a-scene>
